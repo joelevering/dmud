@@ -1,12 +1,3 @@
-module Mudbud
-  class Room
+class Room < ActiveRecord::Base
 
-    attr_reader :description, :exits
-
-    def initialize(description:, exits:)
-      @description = description
-      @exits = exits
-    end
-
-  end
 end
