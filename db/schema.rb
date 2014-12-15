@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215015628) do
+ActiveRecord::Schema.define(version: 20141215020857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20141215015628) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "room_exits", force: true do |t|
+    t.integer  "origin_room_id"
+    t.integer  "destination_room_id"
+    t.string   "description"
+    t.string   "trigger"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "room_exits", ["destination_room_id"], name: "index_room_exits_on_destination_room_id", using: :btree
+  add_index "room_exits", ["origin_room_id"], name: "index_room_exits_on_origin_room_id", using: :btree
 
   create_table "rooms", force: true do |t|
     t.string   "name"
