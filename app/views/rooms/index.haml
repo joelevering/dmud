@@ -1,0 +1,12 @@
+%h1 Rooms
+
+- if @rooms.present?
+  %table
+    %th Name
+    %th Description
+    - @rooms.each do |room|
+      %tr
+        %td= link_to room.name, room_path(room)
+        %td= room.description
+- else
+  No Rooms D:
