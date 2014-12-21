@@ -3,3 +3,8 @@
 %p
   = @room.description
 
+%p= link_to "Edit", edit_room_path(@room)
+
+%p= button_to "Delete", room_path(@room), method: :delete
+
+%p= link_to "Back to all rooms", rooms_path
