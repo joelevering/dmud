@@ -8,6 +8,7 @@ class Runner
 
   def initialize(room)
     @current_room = room || ::Room.find(FIRST_ROOM_ID)
+    @player = Character.new
   end
 
   def start
