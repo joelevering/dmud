@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :rooms
+  resources :rooms do
+    resources :exits, except: [:index]
+  end
+
   resources :characters
   resources :character_classes
   resources :races

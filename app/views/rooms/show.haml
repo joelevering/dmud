@@ -3,7 +3,21 @@
 %p
   = @room.description
 
+%p
+  Exits:
+  %ul
+    - @room.exits.each do |room_exit|
+      %li= room_exit.description
+
+%p
+  Entrances:
+  %ul
+    - @room.entrances.each do |room_entrance|
+      %li= room_entrance.description
+
 %p= link_to "Edit", edit_room_path(@room)
+
+%p= link_to "Add Exit", new_room_exit_path(@room)
 
 %p= button_to "Delete", room_path(@room), method: :delete
 

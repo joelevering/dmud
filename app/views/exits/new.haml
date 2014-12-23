@@ -1,0 +1,15 @@
+%h2 New Exit for #{@room.name}
+
+= form_for @exit do |f|
+  %p= f.label :description
+  %p= f.text_area :description
+
+  %p= f.label :trigger
+  %p= f.text_field :trigger
+
+  %p= f.label "Exit to"
+  %p= f.select :destination_room_id, options_for_select(Room.where.not(id: @room.id).pluck(:name, :id))
+
+  %p= f.hidden_field :origin_room_id, value: @room.id
+
+  = f.submit
