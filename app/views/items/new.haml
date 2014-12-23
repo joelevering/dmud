@@ -1,0 +1,16 @@
+%h2 New Item
+
+= form_for @item do |f|
+  %p= f.label :name
+  %p= f.text_field :name
+
+  %p= f.label :description
+  %p= f.text_area :description
+
+  %p= f.label :room
+  %p= f.select :owner_id, options_for_select(Room.pluck(:name, :id))
+
+  %p= f.hidden_field :owner_type, value: "Room"
+
+
+  = f.submit

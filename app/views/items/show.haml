@@ -1,0 +1,14 @@
+%h2= @item.name
+
+%p
+  = @item.description
+
+%p
+  Room:
+  = @item.owner.name
+
+%p= link_to "Edit", edit_item_path(@item)
+
+%p= button_to "Delete", item_path(@item), method: :delete
+
+%p= link_to "Back to all items", items_path

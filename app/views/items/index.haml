@@ -1,0 +1,15 @@
+%h1 Items
+
+%p= link_to "New Item", new_item_path
+
+- if @items.present?
+  %table
+    %th Name
+    %th Description
+    - @items.each do |item|
+      %tr
+        %td= link_to item.name, item_path(item)
+        %td= item.description
+- else
+  No Items D:
+
