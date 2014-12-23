@@ -2,13 +2,16 @@ class Runner
 
   FIRST_ROOM_ID = 6
 
+  attr_reader :current_room
+
   def self.start
     new(nil).start
   end
 
   def initialize(room)
     @current_room = room || ::Room.find(FIRST_ROOM_ID)
-    @player = Character.new
+    @player = Character.first || Character.create(name: "Slime King", description: "King o' da slimes")
+    @command_router = CommandRouter
   end
 
   def start
@@ -20,6 +23,10 @@ class Runner
         get_and_respond_to_input
       end
     end
+  end
+
+  def update_current_room(new_room)
+    @current_room = new_room
   end
 
   private
@@ -35,31 +42,7 @@ class Runner
   def get_and_respond_to_input
     input = gets.chomp
 
-    respond_to_input(input)
+    @command_router.route_command(command: input, runner: self)
   end
 
-  def respond_to_input(input)
-    if user_wants_to_quit?(input)
-      throw :stop
-    elsif input_associated_with_exit?(input)
-      update_current_room_from_input(input)
-    end
-  end
-
-  def user_wants_to_quit?(input)
-    input == "quit" ? true : false
-  end
-
-  def input_associated_with_exit?(input)
-    current_room_exit_triggers.include?(input)
-  end
-
-  def current_room_exit_triggers
-    @current_room.exits.pluck(:trigger)
-  end
-
-  def update_current_room_from_input(input)
-    room_exit = @current_room.exits.find_by_trigger(input)
-    @current_room = Room.find(room_exit.destination_room_id)
-  end
 end
