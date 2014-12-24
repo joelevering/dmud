@@ -2,7 +2,7 @@ class Runner
 
   FIRST_ROOM_ID = 6
 
-  attr_reader :current_room
+  attr_reader :current_room, :player
 
   def self.start
     new(nil).start
