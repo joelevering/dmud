@@ -17,6 +17,8 @@ class Runner
   def start
     catch :stop do
       while true
+        @current_room.reload
+        @player.reload
         display_room
         display_prompt
 

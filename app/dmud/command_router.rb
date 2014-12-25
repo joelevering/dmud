@@ -55,8 +55,21 @@ class CommandRouter
     end
   end
 
+  def attempt_to_drop_item
+    if player_has_item?
+      give_room_item
+      puts "You drop the #{name_of_item}"
+    else
+      puts "You don't have that item!"
+    end
+  end
+
   def room_has_item?
     room.items.pluck(:name).include?(name_of_item)
+  end
+
+  def player_has_item?
+    player.items.pluck(:name).include?(name_of_item)
   end
 
   def name_of_item
@@ -65,6 +78,10 @@ class CommandRouter
 
   def give_player_item
     player.items << room.items.where("lower(name) = ?", name_of_item.downcase).first
+  end
+
+  def give_room_item
+    room.items << player.items.where("lower(name) = ?", name_of_item.downcase).first
   end
 
   def current_room_exit_triggers
