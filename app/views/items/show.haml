@@ -4,8 +4,9 @@
   = @item.description
 
 %p
-  Room:
+  Owner:
   = @item.owner.name
+  = "(#{@item.owner.class})"
 
 %p= link_to "Edit", edit_item_path(@item)
 
